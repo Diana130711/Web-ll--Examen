@@ -1,11 +1,118 @@
-label{
-    background-color: rgb(249, 162, 31);
-    border: 1px black solid;
-    display: inline-block;
-    padding: 1px;
-    width: 85px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap');
+
+:root{
+    --azul-pokemon: #2A75BB;
+    --azul-oscuro: #1F3A5F;
+    --amarillo-pokemon: #FFCB05;
+    --gris-fondo: #F2F4F7;
+    --blanco: #FFFFFF;
+    --texto: #26333D;
 }
 
-input{
-    background-color: rgb(250, 249, 193);
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--gris-fondo);
+    color: var(--texto);
+}
+
+.cabecera{
+    background: linear-gradient(180deg, var(--azul-pokemon) 0%, var(--azul-oscuro) 100%);
+    padding: 18px 0;
+    text-align: center;
+    border-bottom: 6px solid var(--amarillo-pokemon);
+}
+
+.logo-pokemon{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    color: var(--amarillo-pokemon);
+    text-shadow: 2px 2px 0 var(--azul-oscuro);
+}
+
+.logo-pokemon span{
+    color: var(--blanco);
+}
+
+.barra-generacion{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    max-width: 1100px;
+    margin: 18px auto 6px auto;
+    padding: 0 16px;
+}
+
+.barra-generacion label{
+    font-weight: 600;
+    color: var(--azul-oscuro);
+}
+
+.barra-generacion select{
+    background-color: var(--azul-pokemon);
+    color: var(--blanco);
+    font-weight: 500;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pokedex{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.cargando{
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 500;
+    color: var(--azul-oscuro);
+    padding: 30px 0;
+}
+
+.tarjeta{
+    background-color: var(--blanco);
+    border: 1px solid #DDE3EA;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(31, 58, 95, 0.18);
+    border-color: var(--azul-pokemon);
+}
+
+.tarjeta img{
+    width: 100%;
+    max-width: 110px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    margin-bottom: 6px;
+}
+
+.tarjeta p{
+    margin: 0;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--azul-oscuro);
+}
+
+#modalPokemon.oculto{
+    display: none;
 }

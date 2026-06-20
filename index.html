@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acceso Remoto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
     <link rel="stylesheet" href="styles/formatos.css" media="screen">
 </head>
 <body>
-    <h1>Captura de Datos</h1>
-    <form name="formita" enctype="application/x-www-form-urlencoded">
-        <fieldset>
-            <div class="">
-                <label>Nombre:</label>
-                <input type="text" id="txtNomb" maxlength="15" size="20" required autofocus>
-            </div>
-            <div class="">
-                <label>eMail:</label>
-                <input type="text" id="txtEmail" maxlength="30" size="35" required>
-            </div>
-            <div class="">
-                <label>Contraseña:</label>
-                <input type="password" id="txtContra" maxlength="10" size="15" required>
-            </div>
-        </fieldset>
-        <div>
-            <a href="#" id="btnGuardar">Guardar</a>
-            <a href="#" id="btnMostrar">Mostrar</a>
+
+    <header class="cabecera">
+        <h1 class="logo-pokemon">Pok<span>é</span>dex</h1>
+    </header>
+
+    <main>
+
+        <section class="barra-generacion">
+            <label for="cmbGeneracion">Generación</label>
+            <select id="cmbGeneracion">
+                <option value="0,151">I &nbsp;|&nbsp; Bulbasaur - Mew</option>
+                <option value="151,100">II &nbsp;|&nbsp; Chikorita - Celebi</option>
+                <option value="251,135">III &nbsp;|&nbsp; Treecko - Deoxys</option>
+                <option value="386,107">IV &nbsp;|&nbsp; Turtwig - Arceus</option>
+                <option value="493,156">V &nbsp;|&nbsp; Victini - Genesect</option>
+            </select>
+        </section>
+
+        <!-- Aqui se dibujan las tarjetas de Pokemon (mi parte) -->
+        <div id="Datos" class="pokedex">
+            <p class="cargando">Cargando Pokémon...</p>
         </div>
-    </form>
 
-    <div id="Datos"></div>
+    </main>
 
-    <script src="codes/codigo_05.js"> </script>
+    <!-- Ventana flotante con el detalle del Pokemon.            -->
+    <!-- El contenido/diseño lo completa mi compañera con        -->
+    <!-- mostrarDetalle(nombrePokemon) y cerrarModal()            -->
+    <div id="modalPokemon" class="oculto"></div>
+
+    <script src="codes/codigo_05.js"></script>
 </body>
 </html>
