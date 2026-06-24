@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Entrenador - Pokédex</title>
+    <link rel="stylesheet" href="styles/formatos.css" media="screen">
+</head>
+<body>
+
+    <header class="cabecera">
+        <h1 class="logo-pokemon">Pok<span>é</span>dex</h1>
+    </header>
+
+    <nav class="menu-principal">
+        <a href="index.html">Pokédex</a>
+        <a href="entrenadores.html">Entrenadores</a>
+        <a href="agregar_entrenador.html">Nuevo Entrenador</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="agregarEquipo.html">Nuevo Equipo</a>
+    </nav>
+
+    <main>
+        <h2 class="titulo-seccion">Registrar nuevo entrenador</h2>
+
+        <form id="formEntrenador" class="formulario">
+
+            <div class="campo-formulario">
+                <label for="txtNombre">Nombre y apellidos:</label>
+                <input type="text" id="txtNombre" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="cmbSexo">Sexo:</label>
+                <select id="cmbSexo">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="txtResidencia">Lugar de residencia:</label>
+                <input type="text" id="txtResidencia" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="txtFoto">Foto del entrenador (URL):</label>
+                <input type="text" id="txtFoto" placeholder="https://...">
+            </div>
+
+            <div class="campo-formulario">
+                <img id="imgVistaPrevia" class="vista-previa-foto oculto" alt="Vista previa">
+            </div>
+
+            <button type="button" id="btnGuardarEntrenador" class="btn-guardar">Guardar entrenador</button>
+
+        </form>
+    </main>
+
+    <script src="codes/db.js"></script>
+    <script src="codes/entrenadores.js"></script>
+</body>
+</html>
