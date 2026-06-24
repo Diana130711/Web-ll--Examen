@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Equipo</title>
+    <link rel="stylesheet" href="styles/formatos.css">
+</head>
+
+<body>
+
+<main>
+<section class="contenedor">
+
+    <div class="contenedor-header">
+        <div>
+            <span class="badge-equipo">Nuevo equipo</span>
+            <h1>Equipo Pokémon</h1>
+        </div>
+    </div>
+
+    <div class="contenedor-body">
+        <form id="formEquipo">
+
+            <label for="txtNombre">Nombre:</label>
+            <input type="text" id="txtNombre">
+
+            <label>Bando del equipo:</label>
+
+<input type="hidden" id="txtImagen">
+
+<div class="selector-escudos">
+
+    <div class="escudo-opcion" onclick="seleccionarEscudo(this, 'Rocket')">
+        <div class="escudo-logo rocket">R</div>
+        <span>Rocket</span>
+    </div>
+
+    <div class="escudo-opcion" onclick="seleccionarEscudo(this, 'Aqua')">
+        <div class="escudo-logo aqua">A</div>
+        <span>Aqua</span>
+    </div>
+
+    <div class="escudo-opcion" onclick="seleccionarEscudo(this, 'Magma')">
+        <div class="escudo-logo magma">M</div>
+        <span>Magma</span>
+    </div>
+
+    <div class="escudo-opcion" onclick="seleccionarEscudo(this, 'Galactic')">
+        <div class="escudo-logo galactic">G</div>
+        <span>Galactic</span>
+    </div>
+
+</div>
+
+
+            <label for="cmbEntrenador">Entrenador:</label>
+            <select id="cmbEntrenador">
+                <option value="">Seleccione un entrenador</option>
+                <option value="Ash Ketchum">Ash Ketchum</option>
+                <option value="Misty">Misty</option>
+                <option value="Brock">Brock</option>
+                <option value="Gary Oak">Gary Oak</option>
+                <option value="Cynthia">Cynthia</option>
+                <option value="Leon">Leon</option>
+                <option value="nuevo">Registrar nuevo entrenador</option>
+            </select>
+
+            <div class="seccion-pokemon">
+                <span>Pokémon del equipo</span>
+            </div>
+
+            <div class="pokemon-grid">
+
+                <div class="poke-field">
+                    <label>Pokemon 1</label>
+                    <input type="text" id="txtP1" readonly>
+                    <button type="button" onclick="abrirSelector(1)">Seleccionar</button>
+                </div>
+
+                <div class="poke-field">
+                    <label>Pokemon 2</label>
+                    <input type="text" id="txtP2" readonly>
+                    <button type="button" onclick="abrirSelector(2)">Seleccionar</button>
+                </div>
+
+                <div class="poke-field">
+                    <label>Pokemon 3</label>
+                    <input type="text" id="txtP3" readonly>
+                    <button type="button" onclick="abrirSelector(3)">Seleccionar</button>
+                </div>
+
+                <div class="poke-field">
+                    <label>Pokemon 4</label>
+                    <input type="text" id="txtP4" readonly>
+                    <button type="button" onclick="abrirSelector(4)">Seleccionar</button>
+                </div>
+
+                <div class="poke-field">
+                    <label>Pokemon 5</label>
+                    <input type="text" id="txtP5" readonly>
+                    <button type="button" onclick="abrirSelector(5)">Seleccionar</button>
+                </div>
+
+                <div class="poke-field">
+                    <label>Pokemon 6</label>
+                    <input type="text" id="txtP6" readonly>
+                    <button type="button" onclick="abrirSelector(6)">Seleccionar</button>
+                </div>
+
+            </div>
+
+            <div class="botones-formulario">
+
+                <button type="button" id="btnGuardarEquipo">
+                    Guardar equipo
+                </button>
+
+                <button type="button"
+                        id="btnLimpiar"
+                        onclick="limpiarFormulario()">
+                    Limpiar
+                </button>
+
+                <button type="button"
+                        id="btnVolver"
+                        onclick="window.location.href='index.html'">
+                    Volver
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+
+</section>
+</main>
+
+<div id="selectorPokemon" class="oculto">
+    <div class="selector-contenido">
+        <button type="button" class="btn-cerrar" onclick="cerrarSelector()">X</button>
+
+        <h2>Seleccionar Pokémon</h2>
+
+        <div id="listaPokemonSelector" class="pokedex"></div>
+    </div>
+</div>
+
+<script src="codes/db.js"></script>
+<script src="codes/equipos.js"></script>
+
+</body>
+</html>
