@@ -1,57 +1,175 @@
-/*jshint sub:true*/
-// Declaración de variables locales
-// relacionadas con interface html
-var btnGuardar = document.getElementById("btnGuardar");
-var btnMostrar = document.getElementById("btnMostrar");
-var txtNomb = document.getElementById("txtNomb");
-var txtEmail = document.getElementById("txtEmail");
-var txtContra = document.getElementById("txtContra");
+var cmbGeneracion = document.getElementById("cmbGeneracion");
 var resultados = document.getElementById("Datos");
 
-var salida = "";
-//Declara las variables para conectarse con servidor remoto
-//que contiene el web service
-//--------------------------------------------------------------
-var remoto = new XMLHttpRequest();
-var url = "http://demoyork.com:5000";
+var url = "https://pokeapi.co/api/v2/pokemon";
 
-//Programación de evento botón guardar
-btnGuardar.addEventListener("click",function(){
-    //Determina la funcion HTTPRequest entre sitio local y el remoto
-    remoto.open("POST",url+"/signup",true);
+function cargarGeneracion(){
 
-    //Determina la forma de intercambio de datos entre el sitio local
-    //el sitio remoto para la pagina actual
-    remoto.setRequestHeader('Accept', 'application/json');
-    remoto.setRequestHeader("Content-Type","application/json");
+    var valores = cmbGeneracion.value.split(",");
+    var offset = valores[0];
+    var limit = valores[1];
 
-    remoto.onreadystatechange = function (){
-        if(remoto.readyState==4){
-            if(remoto.status == 201){
-                salida =  "<br /><br />";
+    resultados.innerHTML = "<p class='cargando'>Cargando Pokémon...</p>";
+
+    var remoto = new XMLHttpRequest();
+
+    remoto.open("GET", url + "?offset=" + offset + "&limit=" + limit, true);
+    remoto.setRequestHeader("Accept","application/json");
+
+    remoto.onreadystatechange = function(){
+
+        if(remoto.readyState == 4){
+
+            if(remoto.status == 200){
+
                 var resul = JSON.parse(remoto.responseText);
+                dibujarTarjetas(resul.results);
 
-                salida = salida.concat('status code: '    + resul.status_code    + '<br />');
-                salida = salida.concat('status message: ' + resul.status_message + '<br />');
-
-                salida = salida.concat('Datos Registrados<br />------------------------<br />');
-
-                var data = resul.data["user"];
-
-                salida = salida.concat('Token: '  + data["token"]  + '<br />');
-                salida = salida.concat('Nombre: ' + data["name"]   + '<br />');
-                salida = salida.concat('eMail: '  + data["email"]  + '<br />');
-                salida = salida.concat('Clave: '  + data["passwd"] + '<br />');
-
-                document.getElementById("Datos").innerHTML = salida;
             }else{
-                document.getElementById("Datos").innerHTML = (remoto.responseText);
-            } //fin del if de status
-        }//fin del if readyState
-    }//fin de la funcion interna
 
-    var datos = JSON.stringify({"name":txtNomb.value,
-                                "email":txtEmail.value,
-                                "passwd":txtContra.value});
-    remoto.send(datos);
-});
+                resultados.innerHTML = "<p>Error al cargar los datos: " + remoto.status + "</p>";
+            }
+        }
+    };
+
+    remoto.send();
+}
+
+function dibujarTarjetas(lista){
+
+    var salida = "";
+
+   for(var i = 0; i < lista.length; i++){
+
+    var nombre = lista[i]["name"];
+
+    var partes = lista[i]["url"].split("/");
+    var idPokemon = partes[partes.length - 2];
+
+    var imagen =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+        + idPokemon + ".png";
+
+    salida = salida.concat(
+        '<div class="tarjeta" data-nombre="' + nombre + '">' +
+            '<img src="' + imagen + '" alt="' + nombre + '">' +
+            '<p>' + nombre + '</p>' +
+        '</div>'
+    );
+}
+
+    resultados.innerHTML = salida;
+
+    var tarjetas = document.getElementsByClassName("tarjeta");
+
+    for(var j = 0; j < tarjetas.length; j++){
+
+        tarjetas[j].addEventListener("click", function(){
+
+            var nombreSel = this.getAttribute("data-nombre");
+            mostrarDetalle(nombreSel);
+        });
+    }
+}
+
+function mostrarDetalle(nombrePokemon){
+
+    var remoto = new XMLHttpRequest();
+    var urlDetalle = "https://pokeapi.co/api/v2/pokemon/" + nombrePokemon;
+
+    remoto.open("GET", urlDetalle, true);
+    remoto.setRequestHeader("Accept","application/json");
+
+    remoto.onreadystatechange = function(){
+
+        if(remoto.readyState == 4){
+
+            if(remoto.status == 200){
+
+                var pokemon = JSON.parse(remoto.responseText);
+
+                var numero = pokemon.id.toString().padStart(3,"0");
+
+                var imagen = "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/"
+                           + numero + ".png";
+
+                var tipos = "";
+                var habilidades = "";
+                var movimientos = "";
+
+                for(var i = 0; i < pokemon.types.length; i++){
+                    tipos = tipos.concat(pokemon.types[i].type.name);
+
+                    if(i < pokemon.types.length - 1){
+                        tipos = tipos.concat(" - ");
+                    }
+                }
+
+                for(var j = 0; j < pokemon.abilities.length; j++){
+                    habilidades = habilidades.concat(pokemon.abilities[j].ability.name);
+
+                    if(j < pokemon.abilities.length - 1){
+                        habilidades = habilidades.concat(" - ");
+                    }
+                }
+
+                for(var k = 0; k < 10 && k < pokemon.moves.length; k++){
+                    movimientos = movimientos.concat(pokemon.moves[k].move.name);
+
+                    if(k < 9 && k < pokemon.moves.length - 1){
+                        movimientos = movimientos.concat(" - ");
+                    }
+                }
+
+                var salida = "";
+
+                salida = salida.concat('<div class="modal-contenido">');
+                salida = salida.concat('<button onclick="cerrarModal()" class="btn-cerrar">X</button>');
+
+                salida = salida.concat('<h2>' + pokemon.name + '</h2>');
+
+                salida = salida.concat('<div class="modal-cuerpo">');
+
+                salida = salida.concat('<div class="modal-img">');
+                salida = salida.concat('<img src="' + imagen + '" alt="' + pokemon.name + '">');
+                salida = salida.concat('</div>');
+
+                salida = salida.concat('<div class="modal-info">');
+                salida = salida.concat('<p><b>Pokémon ID:</b> #' + numero + '</p>');
+                salida = salida.concat('<p><b>Weight:</b> ' + (pokemon.weight / 10) + ' kgs</p>');
+                salida = salida.concat('<p><b>Height:</b> ' + (pokemon.height / 10) + ' mts</p>');
+                salida = salida.concat('<p><b>Types:</b> ' + tipos + '</p>');
+                salida = salida.concat('<p><b>Abilities:</b> ' + habilidades + '</p>');
+                salida = salida.concat('<p><b>Moves:</b> ' + movimientos + '</p>');
+                salida = salida.concat('</div>');
+
+                salida = salida.concat('</div>');
+                salida = salida.concat('</div>');
+
+                document.getElementById("modalPokemon").innerHTML = salida;
+                document.getElementById("modalPokemon").classList.remove("oculto");
+
+            }else{
+
+                document.getElementById("modalPokemon").innerHTML =
+                    '<div class="modal-contenido">' +
+                    '<button onclick="cerrarModal()" class="btn-cerrar">X</button>' +
+                    '<p>Error al cargar el detalle del Pokémon.</p>' +
+                    '</div>';
+
+                document.getElementById("modalPokemon").classList.remove("oculto");
+            }
+        }
+    };
+
+    remoto.send();
+}
+
+function cerrarModal(){
+
+    document.getElementById("modalPokemon").classList.add("oculto");
+}
+
+cmbGeneracion.addEventListener("change", cargarGeneracion);
+
+cargarGeneracion();
