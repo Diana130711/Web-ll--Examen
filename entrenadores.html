@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenadores - Pokédex</title>
+    <link rel="stylesheet" href="styles/formatos.css" media="screen">
+</head>
+<body>
+
+    <header class="cabecera">
+        <h1 class="logo-pokemon">Pok<span>é</span>dex</h1>
+    </header>
+
+    <nav class="menu-principal">
+        <a href="index.html">Pokédex</a>
+        <a href="entrenadores.html">Entrenadores</a>
+        <a href="agregar_entrenador.html">Nuevo Entrenador</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="agregarEquipo.html">Nuevo Equipo</a>
+    </nav>
+
+    <main>
+        <h2 class="titulo-seccion">Entrenadores registrados</h2>
+
+        <div id="listaEntrenadores" class="lista-entrenadores">
+            <p class="cargando">Cargando entrenadores...</p>
+        </div>
+    </main>
+
+    <script src="codes/db.js"></script>
+    <script src="codes/entrenadores.js"></script>
+</body>
+</html>

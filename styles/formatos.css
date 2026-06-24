@@ -778,3 +778,128 @@ body{
     background: #D62828;
     color: white;
 }
+
+
+.menu-principal{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    background-color: var(--azul-oscuro);
+    padding: 10px 16px;
+}
+
+.menu-principal a{
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+}
+
+.menu-principal a:hover{
+    background-color: var(--azul-pokemon);
+}
+
+
+.titulo-seccion{
+    text-align: center;
+    color: var(--azul-oscuro);
+    font-family: 'Poppins', sans-serif;
+    margin: 22px 0 10px 0;
+}
+
+
+.formulario{
+    max-width: 480px;
+    margin: 0 auto 30px auto;
+    background-color: var(--blanco);
+    border: 1px solid #DDE3EA;
+    border-radius: 10px;
+    padding: 22px;
+}
+
+.campo-formulario{
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-formulario label{
+    font-weight: 600;
+    color: var(--azul-oscuro);
+}
+
+.campo-formulario input,
+.campo-formulario select{
+    padding: 8px 10px;
+    border: 1px solid #C7CFD9;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.btn-guardar{
+    background-color: var(--azul-pokemon);
+    color: var(--blanco);
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-guardar:hover{
+    background-color: var(--azul-oscuro);
+}
+
+.vista-previa-foto{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #C7CFD9;
+}
+
+
+.lista-entrenadores{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.tarjeta-entrenador{
+    background-color: var(--blanco);
+    border: 1px solid #DDE3EA;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+}
+
+.tarjeta-entrenador img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.tarjeta-entrenador h3{
+    margin: 4px 0;
+    color: var(--azul-oscuro);
+}
+
+.tarjeta-entrenador p{
+    margin: 2px 0;
+    font-size: 0.9rem;
+}
+
+
+.oculto{
+    display: none;
+}
